@@ -106,5 +106,46 @@ According to the datasheet, a typical I2C write to the ADAU1761 looks like this:
 
 ![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/ADAU1761%20I2C%20Format.PNG)
 
+Basically, in order to write to the ADAU1761 over I2C, you must write the chip address to the line (in my case, 0x70), wait for an "ACK", then write the high byte of the sub address word, wait for an "ACK", write the low byte of the sub address word, wait for an "ACK", and then write the data.
+
+The SoftI2CMaster library abstracts a lot of the timing and lower level functionality so one only has a couple functions to deal with in order to communicate to a device via I2C (namely i2c_start(dev address), i2c_write(byte), and i2c_stop();
+
+As per the SigmaStudioFW.h flie, the SIGMA_WRITE_REGISTER_BLOCK takes 4 parameters, the IC address, the word sub address, the length of the data that you will write to it, and the data itself. 
+
+Below is a copy of the SIGMA_WRITE_REGISTER_BLOCK macro in the provided Arduino code:
 
 
+
+
+void SIGMA_WRITE_REGISTER_BLOCK(byte IC_address, word subAddress, int dataLength, byte pdata[]) {
+  
+  // start I2C transfer
+  if (!i2c_start((IC_address)|I2C_WRITE)) { 
+    Serial.println("I2C device busy for WRITE REGISTER BLOCK");
+    return;
+  }
+  
+  // write subAddresses. (ADAU1761 needs the 16 bit subAddress written as two 8 bit bytes with an "ACK" inbetween
+  uint8_t addressLowByte = subAddress & 0xff;
+  uint8_t addressHighByte = (subAddress >> 8);
+
+  i2c_write(addressHighByte); 
+  i2c_write(addressLowByte); 
+
+  if (dataLength < 50 ) {
+    for (int i=0; i<dataLength; i++) { 
+      i2c_write(pdata[i]); //write data bytes
+    }
+  }
+  else { 
+    for (int i=0; i<dataLength; i++) {
+      i2c_write(pgm_read_byte_near(pdata + i)); //write data bytes from PROGMEM (for param and program data)
+    }
+  }
+  i2c_stop(); // stop the I2C communication
+  
+}
+
+
+
+Essentially, the code starts a transfer to the ADAU1761 (IC_address) and prints "I2C device busy for WRITE REGISTER BLOCK" if it fails to join the I2C bus. Following this, the sub address (word subAddress, where you will write the data to within the chip itself), is split into a high byte and a low byte as per the typical I2C write image from the datasheet above. Next, the code iterates through the array of bytes (pdata of length dataLength) and writes that to the ADAU1761 from either SRAM or PROGMEM (depending on the length of the data array). Because SRAM is precious space in Arduino, NOT putting the large (~1kb) arrays of data into PROGMEM (program memory) will easily exceed the maximum size of the Arduino sketch! 
