@@ -89,7 +89,11 @@ The bulk of the work needed in this project is for the user to copy the register
 The last step is to copy the contents of the function "IC_DEFAULT_DOWNLOAD" from the #IC_1.h file 
 
 
-![github-small]https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/Sigma%20Default%20Download%20Function.PNG
+![github-small](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/Sigma%20Default%20Download%20Function.PNG)
+
+This is a photo of the Default_Download funciton as it appears in the .h file. This must be copied and pasted into where it currently exists in the provided Arduino code.
 
 
+An Explenation of the I2C Macro 
+------------------------------------------------------------------------------------------------------------------------
 
