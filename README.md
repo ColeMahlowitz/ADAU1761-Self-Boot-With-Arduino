@@ -1,5 +1,5 @@
 # ADAU1761-with-Arduino-Bootloader
-This project demonstrates how to use an Arduino (ATmega328) to function as an external bootloader for the ADAU1761 which has no internal EEPROM like the ADAU1452
+This project demonstrates how to use an Arduino (ATmega328) to function as an external bootloader for the ADAU1761 which has no internal EEPROM like the ADAU1452 or self-boot function.
 
 
 
@@ -45,7 +45,7 @@ This tutorial picks up from page 15 in Wilfrido's tutorial
 
 This library implements an I2C protocal which is written in assembly and is very fast. It also comes with much more functionality than the standard Arduino "wire" library for I2C communication which is much slower and limits the user to a 32 byte buffer (lame!). It is also incumbant upon the user to be somewhat familiar with I2C two wire communication.
 
-*** please note, the code provided does not currently support the integration of sequences for more complicated Sigma Studio schematics (such as ones that include routing switches that are index selectable). 
+*** please note, the that I have provided does not currently support the integration of sequences for more complicated Sigma Studio schematics (such as ones that include routing switches that are index selectable). 
 
 
 
@@ -84,7 +84,12 @@ register address needed to program the ADAU1761 upon power up.
 
 You will then need to copy the provided Arduino code found in the repository into your IDE. 
 
-The bulk of the work needed in this project is for the user to copy the register data from the #IC_1.h to the provided Arduino IDE code (e.g. ADI_REG_TYPE R0_SAMPLE_RATE_SETTING_IC_1_Default[REG_SAMPLE_RATE_SETTING_IC_1_BYTE] = {0x7F} ). This is instantiating an array of type unsigned char called "R0_SAMPLE_RATE_SETTING_IC_1_Default" of length "REG_SAMPLE_RATE_SETTING_IC_1_BYTE" that contains the bytes 0x7F. The user must also copy in the "program data" array and the "param data" array from their own IC_1.h file into the Arduino IDE code. 
+The bulk of the work needed in this project is for the user to copy the register data from the #IC_1.h to the provided Arduino IDE code (e.g. ADI_REG_TYPE R0_SAMPLE_RATE_SETTING_IC_1_Default[REG_SAMPLE_RATE_SETTING_IC_1_BYTE] = {0x7F} ). This line of code is instantiating an array of type unsigned char called "R0_SAMPLE_RATE_SETTING_IC_1_Default" of length "REG_SAMPLE_RATE_SETTING_IC_1_BYTE" that contains the bytes 0x7F. For each ADI REG TYPE someArray[someLength] = {byte, byte, byte, etc...}, you must copy that from the #IC_1.h file into the same place that it exists my provided code. Apart from copying over the ADI REG TYPE data, you must also copy the large(er) ADI REG TYPE "Program Data" as well as the ADI REG TYPE "Param Data" found in the .h file into the correct space in the provided Arduino code.
+
+The last step is to copy the contents of the function "IC_DEFAULT_DOWNLOAD" from the #IC_1.h file 
+
+
+
 
 
 
