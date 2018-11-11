@@ -116,34 +116,34 @@ Below is a copy of the SIGMA_WRITE_REGISTER_BLOCK macro in the provided Arduino 
 
 
 
-void SIGMA_WRITE_REGISTER_BLOCK(byte IC_address, word subAddress, int dataLength, byte pdata[]) {
+    void SIGMA_WRITE_REGISTER_BLOCK(byte IC_address, word subAddress, int dataLength, byte pdata[]) {
   
-  // start I2C transfer
-  if (!i2c_start((IC_address)|I2C_WRITE)) { 
-    Serial.println("I2C device busy for WRITE REGISTER BLOCK");
-    return;
-  }
+      // start I2C transfer
+      if (!i2c_start((IC_address)|I2C_WRITE)) { 
+        Serial.println("I2C device busy for WRITE REGISTER BLOCK");
+        return;
+      }
   
-  // write subAddresses. (ADAU1761 needs the 16 bit subAddress written as two 8 bit bytes with an "ACK" inbetween
-  uint8_t addressLowByte = subAddress & 0xff;
-  uint8_t addressHighByte = (subAddress >> 8);
+      // write subAddresses. (ADAU1761 needs the 16 bit subAddress written as two 8 bit bytes with an "ACK" inbetween
+      uint8_t addressLowByte = subAddress & 0xff;
+      uint8_t addressHighByte = (subAddress >> 8);
 
-  i2c_write(addressHighByte); 
-  i2c_write(addressLowByte); 
+      i2c_write(addressHighByte); 
+      i2c_write(addressLowByte); 
 
-  if (dataLength < 50 ) {
-    for (int i=0; i<dataLength; i++) { 
-      i2c_write(pdata[i]); //write data bytes
-    }
-  }
-  else { 
-    for (int i=0; i<dataLength; i++) {
-      i2c_write(pgm_read_byte_near(pdata + i)); //write data bytes from PROGMEM (for param and program data)
-    }
-  }
-  i2c_stop(); // stop the I2C communication
+      if (dataLength < 50 ) {
+        for (int i=0; i<dataLength; i++) { 
+          i2c_write(pdata[i]); //write data bytes
+        }
+      }
+      else { 
+        for (int i=0; i<dataLength; i++) {
+          i2c_write(pgm_read_byte_near(pdata + i)); //write data bytes from PROGMEM (for param and program data)
+        }
+      }
+      i2c_stop(); // stop the I2C communication
   
-}
+    }
 
 
 
