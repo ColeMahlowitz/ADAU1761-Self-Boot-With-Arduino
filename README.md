@@ -91,9 +91,18 @@ The last step is to copy the contents of the function "IC_DEFAULT_DOWNLOAD" from
 
 ![github-small](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/Sigma%20Default%20Download%20Function.PNG)
 
-This is a photo of the Default_Download funciton as it appears in the .h file. This must be copied and pasted into where it currently exists in the provided Arduino code.
+This is a photo of the Default_Download funciton as it appears in the .h file. This must be copied and pasted into where it currently exists in the provided Arduino code. This function calls the "SIGMA_WRITE_REGISTER_BLOCK" and "SIGMA_WRITE_DELAY" macros and passes all the corresponding register data in order to write it to the ADAu1761.
+
 
 
 An Explenation of the I2C Macro 
 ------------------------------------------------------------------------------------------------------------------------
+
+
+
+The heavy lifting in this code relies on the two macros, "SIGMA_WRITE_REGISTER_BLOCK" and "SIGMA_WRITE_DELAY" functions that exist at the top of the Arduino code. 
+
+According to the datasheet, a typical I2C write to the ADAU1761 looks like this:
+
+
 
