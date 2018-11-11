@@ -47,7 +47,7 @@ This tutorial picks up from page 11 in Wilfrido's tutorial
 
 Below is a photo of the Sigma Studio Schematic that I've generated for an audio project:
 
-![alt text](file:///C:/Users/ColeMahlowitz/Desktop/Sigma%20Studio%20Schematic.PNG)
+
 
 
 
