@@ -38,6 +38,10 @@ Please read the tutorial on the basics of microcontroller integration with Sigma
 
 This tutorial picks up from page 11 in Wilfrido's tutorial
 
+*** also, you will need to download and install Felias Fogg's SoftI2CMaster library which he has *graciously* posted here: https://github.com/felias-fogg/SoftI2CMaster
+
+This library implements an I2C protocal which is written in assembly and is very fast. It also comes with much more functionality than the standard Arduino "wire" library for I2C communication which is much slower and limits the user to a 32 byte buffer (lame!). 
+
 
 --------------------------------------------------------------------------------------------------------------------
 
