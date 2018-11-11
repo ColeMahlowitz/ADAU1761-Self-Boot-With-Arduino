@@ -58,8 +58,7 @@ In order for this to work, one needs to configure the evaluation board as follow
 
 1) connect J16 to bring IOVDD to AVDD voltage
 2) disconnect J5 (USB 5v power) and connect an external 5V power supply (preferably from the Arduino itself)
-3) connect two 10k resistors from both the SCL and SDA pins (pins 1 and 3) on the control port connector to IOVDD to serve as pullups   
-   for the SCL and SDA lines 
+3) connect two 10k resistors from both the SCL and SDA pins (pins 1 and 3) on the control port connector to IOVDD to serve as pullups for the SCL and SDA lines 
 4) make sure the MCLK clock source is set to "OSC" (onboard oscillator) and the VDD switch is set to 3.3v
 
 and for the Arduino:
