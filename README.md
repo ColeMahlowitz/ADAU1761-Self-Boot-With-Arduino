@@ -1,2 +1,51 @@
 # ADAU1761-with-Arduino-Bootloader
 This project demonstrates how to use an Arduino (ATmega328) to function as an external bootloader for the ADAU1761 which has no internal EEPROM like the ADAU1452
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+**Introduction**
+
+The ADAU1761 is a very powerful audio DSP chip distributed by Analog Devices and utilized with the Sigma Studio graphical programming development tool. One unfortunate thing is that the evaluation kit (along with the IC itself) doesn't contain any self-boot function or EEPROM, so one needs to connect it to the GUI on their laptop and download the program each time they power down the IC. The ADAU1772 does contain a self-boot function, but much of the DSP functionality offered by the ADAU1761 isn't supported on the ADAU1772 and is not a drop-in replacement. The ADAU1452 does contain internal EEPROM, but it is more $$$ and comes in a much larger chip package (72 lead LFCSP vs. 32 lead LFCSP).
+
+This repository is designed to show you how to use an Arduino IDE along with the ATmega328 to function as an external bootloader for the ADAu1761, such that, one can power on the circuit and have the ATmega328 download the Sigma Studio schematic without having to connect it to the GUI environment on a laptop.
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+#What you will need:
+
+1) [ADAU1761 Evaluation Board] (https://www.digikey.com/product-detail/en/analog-devices-inc/EVAL-ADAU1761Z/EVAL-ADAU1761Z-ND/1995482
+
+2) [Arduino Uno] (https://www.digikey.com/product-detail/en/arduino/A000073/1050-1041-ND/3476357)
+
+3) Sigma Studio development environment (https://www.analog.com/en/design-center/processors-and-dsp/evaluation-and-development-software/ss_sigst_02.html#dsp-overview)
+
+4) a couple jumper wires to connet the arduino 
+
+
+
+*nota bene* this tutorial uses the Arduino uno along with the SoftI2CMaster library - this library runs on only AVR MCUs, but its github (https://github.com/felias-fogg/SoftI2CMaster) offers other wrappers for those using an IC with an ARM platform
+
+--------------------------------------------------------------------------------------------------------------------
+
+#Before you start
+
+Please read the tutorial on the basics of microcontroller integration with Sigma Studio given by Wilfrido Sierra (2010) found here: https://ez.analog.com/dsp/sigmadsp/w/documents/5206/how-do-i-create-the-microcontroller-code-to-interface-to-my-sigmadsp
+
+
+This tutorial picks up from page 11 in Wilfrido's tutorial
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+*** please note, the code provided does not currently support the integration of sequences for more complicated Sigma Studio schematics (such as ones that include routing switches that are index selectable). 
+
+
+Below is a photo of the Sigma Studio Schematic that I've generated for an audio project:
+
+
+
