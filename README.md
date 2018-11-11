@@ -155,7 +155,7 @@ Conclusion
 
 
 
-With not too much fuss, one can use the Sigma Studio "export system files" button to automatically generate all the data necessary for microcontroller integration, copy and paste it into the correct locations in the provided code, and use only 4 wires (5V, GND, SDA, and SCL) to have the Arduino boot a set program from memory into the ADAU DSP chip.
+With not too much fuss, one can use the Sigma Studio "export system files" button to automatically generate all the data necessary for microcontroller integration, copy and paste it into the correct locations in the provided code, and use only 4 wires (5V, GND, SDA, and SCL) to have the Arduino boot a set program from memory into the ADAU DSP chip. This should also work on all other ADAU chips, but I have not tested each one yet.
 
 
 
