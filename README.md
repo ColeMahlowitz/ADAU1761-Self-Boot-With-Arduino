@@ -24,7 +24,7 @@ What You Will Need:
 
 3) Sigma Studio development environment (https://www.analog.com/en/design-center/processors-and-dsp/evaluation-and-development-software/ss_sigst_02.html#dsp-overview)
 
-4) a couple jumper wires to connet the arduino and 2 10k resistors
+4) a couple jumper wires to connet the arduino and 2, 10k resistors
 
 
 *nota bene* this tutorial uses the Arduino uno along with the SoftI2CMaster library - this library runs on only AVR MCUs, but its github (https://github.com/felias-fogg/SoftI2CMaster) offers other wrappers for those using an IC with an ARM platform
