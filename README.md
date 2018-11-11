@@ -104,5 +104,7 @@ The heavy lifting in this code relies on the two macros, "SIGMA_WRITE_REGISTER_B
 
 According to the datasheet, a typical I2C write to the ADAU1761 looks like this:
 
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/ADAU1761%20I2C%20Format.PNG)
+
 
 
