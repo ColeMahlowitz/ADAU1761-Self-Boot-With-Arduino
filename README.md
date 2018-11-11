@@ -49,7 +49,7 @@ This library implements an I2C protocal which is written in assembly and is very
 
 
 
-Hardware Setup:
+Hardware Setup
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -88,7 +88,7 @@ The bulk of the work needed in this project is for the user to copy the register
 The last step is to copy the contents of the function "IC_DEFAULT_DOWNLOAD" from the #IC_1.h file 
 
 
-![github-small](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/Sigma%20Default%20Download%20Function.PNG)
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/Sigma%20Default%20Download%20Function.PNG)
 
 This is a photo of the Default_Download funciton as it appears in the .h file. This must be copied and pasted into where it currently exists in the provided Arduino code. This function calls the "SIGMA_WRITE_REGISTER_BLOCK" and "SIGMA_WRITE_DELAY" macros and passes all the corresponding register data in order to write it to the ADAu1761.
 
@@ -148,3 +148,29 @@ Below is a copy of the SIGMA_WRITE_REGISTER_BLOCK macro in the provided Arduino 
 
 
 Essentially, the code starts a transfer to the ADAU1761 (IC_address) and prints "I2C device busy for WRITE REGISTER BLOCK" if it fails to join the I2C bus. Following this, the sub address (word subAddress, where you will write the data to within the chip itself), is split into a high byte and a low byte as per the typical I2C write image from the datasheet above. Next, the code iterates through the array of bytes (pdata of length dataLength) and writes that to the ADAU1761 from either SRAM or PROGMEM (depending on the length of the data array). Because SRAM is precious space in Arduino, NOT putting the large (~1kb) arrays of data into PROGMEM (program memory) will easily exceed the maximum size of the Arduino sketch! 
+
+
+Conclusion
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+With not too much fuss, one can use the Sigma Studio "export system files" button to automatically generate all the data necessary for microcontroller integration, copy and paste it into the correct locations in the provided code, and use only 4 wires (5V, GND, SDA, and SCL) to have the Arduino boot a set program from memory into the ADAU DSP chip.
+
+
+
+* please remember that, although it works, the coding convention in the provided code may not be totally sound and/or perfect; I am far from an actual firmware engineer. 
+
+
+
+
+
+Citations and links:
+
+-Fogg, Felias, "SoftI2CMaster", (2018), GitHub repository, https://github.com/felias-fogg/SoftI2CMaster
+
+-Sierra, Wilfrido, "Basic Microcontroller Integration Using Sigma Studio", (2010), https://ez.analog.com/dsp/sigmadsp/w/documents/5206/how-do-i-create-the-microcontroller-code-to-interface-to-my-sigmadsp
+
+-https://www.analog.com/media/en/technical-documentation/data-sheets/adau1761.pdf
+
+-https://www.analog.com/media/en/technical-documentation/evaluation-documentation/EVAL-ADAU1761Z.pdf
