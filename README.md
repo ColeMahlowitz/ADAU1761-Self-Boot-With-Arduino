@@ -105,9 +105,9 @@ According to the datasheet, a typical I2C write to the ADAU1761 looks like this:
 
 ![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/ADAU1761%20I2C%20Format.PNG)
 
-Basically, in order to write to the ADAU1761 over I2C, you must write the chip address to the line (in my case, 0x70), wait for an "ACK", then write the high byte of the sub address word, wait for an "ACK", write the low byte of the sub address word, wait for an "ACK", and then write the data.
+Basically, in order to write to the ADAU1761 over I2C, you must write the chip address to the line (in my case, 0x70), wait for an "AS" (acknowledged by slave), then write the high byte of the sub address word, wait for an "AS", write the low byte of the sub address word, wait for an "AS", and then write the data.
 
-The SoftI2CMaster library abstracts a lot of the timing and lower level functionality so one only has a couple functions to deal with in order to communicate to a device via I2C (namely i2c_start(dev address), i2c_write(byte), and i2c_stop();
+The SoftI2CMaster library abstracts a lot of the timing and lower level functionality so one only has a couple functions to deal with in order to communicate to a device via I2C (namely i2c_start(dev address), i2c_write(byte), and i2c_stop(); You also don't need to worry about waiting for an acknowledgement by the slave device (the ADAU1761). The i2c_write(byte) function returns a FALSE if the slave device DOESN'T return an acknowledgement. 
 
 As per the SigmaStudioFW.h flie, the SIGMA_WRITE_REGISTER_BLOCK takes 4 parameters, the IC address, the word sub address, the length of the data that you will write to it, and the data itself. 
 
