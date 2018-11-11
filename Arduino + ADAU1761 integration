@@ -206,13 +206,15 @@ void IC_Default_Download() {
   #define REG_DSP_SLEW_MODES_IC_1_BYTE                              1
   #define REG_SERIAL_PORT_SAMPLE_RATE_SETTING_IC_1_BYTE             1
   #define R32_CLOCK_ENABLE_REGISTERS_IC_1_SIZE                      2
-  #define PARAM_SIZE_IC_1                                           556
+  #define PARAM_SIZE_IC_1                                           556 //this will vary according to your schematic
   #define NON_MODULO_RAM_SIZE_IC_1                                  8
   #define REG_DEJITTER_REGISTER_CONTROL_IC_1_BYTE                   1
                          
 /***************************************************************************************************************/
 
   // store default data bytes as ADI REG TYPE (unsigned chars) 
+  // these values will all vary from schematic to schematic 
+  
   ADI_REG_TYPE R0_SAMPLE_RATE_SETTING_IC_1_Default[REG_SAMPLE_RATE_SETTING_IC_1_BYTE] = {0x7F};
   ADI_REG_TYPE R1_DSP_RUN_REGISTER_IC_1_Default[REG_DSP_RUN_REGISTER_IC_1_BYTE] = {0x00};
   ADI_REG_TYPE R2_CLKCTRLREGISTER_IC_1_Default[REG_CLKCTRLREGISTER_IC_1_BYTE] = {0x0F};
