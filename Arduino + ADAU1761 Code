@@ -131,8 +131,10 @@ void IC_Default_Download() {
   /***************************************************************************************************************/
   
   // define the IC address and the all the subAddresses
+  // these may vary from schematic to schematic. You must check your *_IC_1.h file for the correct addresses
   
-  #define DEVICE_ADDR_IC_1                                          0x70  //this address may vary (check SigmaStudio GUI)
+  
+  #define DEVICE_ADDR_IC_1                                          0x70  
   #define REG_SAMPLE_RATE_SETTING_IC_1_ADDR                         0x40EB
   #define REG_DSP_RUN_REGISTER_IC_1_ADDR                            0x40F6
   #define REG_CLKCTRLREGISTER_IC_1_ADDR                             0x4000
@@ -172,6 +174,7 @@ void IC_Default_Download() {
 /***************************************************************************************************************/
 
   // define the size (length) of the subaddresses 
+  // these may vary from schematic to schematic. You must check your *_IC_1.h file for the correct data sizes
   
   #define REG_SAMPLE_RATE_SETTING_IC_1_BYTE                         1
   #define REG_DSP_RUN_REGISTER_IC_1_BYTE                            1
@@ -206,7 +209,7 @@ void IC_Default_Download() {
   #define REG_DSP_SLEW_MODES_IC_1_BYTE                              1
   #define REG_SERIAL_PORT_SAMPLE_RATE_SETTING_IC_1_BYTE             1
   #define R32_CLOCK_ENABLE_REGISTERS_IC_1_SIZE                      2
-  #define PARAM_SIZE_IC_1                                           556 //this will vary according to your schematic
+  #define PARAM_SIZE_IC_1                                           556 
   #define NON_MODULO_RAM_SIZE_IC_1                                  8
   #define REG_DEJITTER_REGISTER_CONTROL_IC_1_BYTE                   1
                          
