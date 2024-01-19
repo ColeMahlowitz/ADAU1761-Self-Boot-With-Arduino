@@ -159,7 +159,7 @@ With not too much fuss, one can use the Sigma Studio "export system files" butto
 
 
 
-* please remember that, although it works, the coding convention in the provided code may not be totally sound and/or perfect; I am far from an actual firmware engineer. 
+* please remember that, although it works, the coding convention in the provided sample may not be totally perfect; I am not yet a firmware engineer. 
 
 
 
