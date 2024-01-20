@@ -75,7 +75,6 @@ Software Setup
 Below is a photo of the Sigma Studio Schematic that I've generated for an audio project:
 
 
-![github-small](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/SigmaStudio_SampleSchematic.jpg)
 
 ![github-large](https://github.com/ColeMahlowitz/ADAU1761-Self-Boot-With-Arduino/blob/master/SigmaStudio_SampleSchematic.JPG)
 
