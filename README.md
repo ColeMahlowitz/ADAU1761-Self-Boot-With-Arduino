@@ -7,9 +7,9 @@ This project demonstrates how to use an Arduino (ATmega328) to function as an ex
 ---------------------------------------------------------------------------------------------------------------------
 
 
-The ADAU1761 is a very powerful audio DSP chip distributed by Analog Devices and utilized with the Sigma Studio graphical programming development tool. One unfortunate thing is that the evaluation kit (along with the IC itself) doesn't contain any self-boot function or EEPROM, so one needs to connect it to the GUI on their laptop and download the program each time they power down the IC. The ADAU1772 does contain a self-boot function, but much of the DSP functionality offered by the ADAU1761 isn't supported on the ADAU1772 and is not a drop-in replacement. The ADAU1452 does contain internal EEPROM, but it is more $$$ and comes in a much larger chip package (72 lead LFCSP vs. 32 lead LFCSP).
+The SigmaDSP audio processor line from Analog Devices contains several powerful single chip audio DSPs easily configurable via the SigmaStudio graphical programming development tool. One unfortunate shortcoming with several of the available ICs is that the smaller chip package ICs don't contain any self-boot function or EEPROM which essentially prevents its use unless connected to a laptop. The ADAU1772 does contain a self-boot function, but much of the DSP functionality offered by the ADAU1761 isn't supported on the ADAU1772 and is not a drop-in replacement. The ADAU1452 does contain internal EEPROM, but it is more $$$ and comes in a much larger chip package (72 lead LFCSP vs. 32 lead LFCSP).
 
-This repository is designed to show you how to use an Arduino IDE along with the ATmega328 to function as an external bootloader for the ADAu1761, such that, one can power on the circuit and have the ATmega328 download the Sigma Studio schematic without having to connect it to the GUI environment on a laptop.
+This repository is designed to show you how to use an Arduino IDE (ATmega328) to function as an external bootloader for the ADAU1761 for use in many consumer audio electronics. 
 
 
 
@@ -41,7 +41,7 @@ Please read the tutorial on the basics of microcontroller integration with Sigma
 
 This tutorial picks up from page 15 in Wilfrido's tutorial
 
-*** also, you will need to download and install Felias Fogg's SoftI2CMaster library which he has *graciously* posted here: https://github.com/felias-fogg/SoftI2CMaster
+*** you will also need to download and install Felias Fogg's SoftI2CMaster library which he has *graciously* posted here: https://github.com/felias-fogg/SoftI2CMaster
 
 This library implements an I2C protocal which is written in assembly and is very fast. It also comes with much more functionality than the standard Arduino "wire" library for I2C communication which is much slower and limits the user to a 32 byte buffer (lame!). It is also incumbant upon the user to be somewhat familiar with I2C two wire communication.
 
@@ -132,14 +132,14 @@ Below is a copy of the SIGMA_WRITE_REGISTER_BLOCK macro in the provided Arduino 
       i2c_write(addressHighByte); 
       i2c_write(addressLowByte); 
 
-      if (dataLength < 50 ) {
+      if (dataLength < 50 ) { //write data bytes to SRAM if datalength is relatively short
         for (int i=0; i<dataLength; i++) { 
           i2c_write(pdata[i]); //write data bytes
         }
       }
       else { 
         for (int i=0; i<dataLength; i++) {
-          i2c_write(pgm_read_byte_near(pdata + i)); //write data bytes from PROGMEM (for param and program data)
+          i2c_write(pgm_read_byte_near(pdata + i)); //write data bytes to PROGMEM (for param and program data because they are larger)
         }
       }
       i2c_stop(); // stop the I2C communication
@@ -156,7 +156,7 @@ Conclusion
 
 
 
-With not too much fuss, one can use the Sigma Studio "export system files" button to automatically generate all the data necessary for microcontroller integration, copy and paste it into the correct locations in the provided code, and use only 4 wires (5V, GND, SDA, and SCL) to have the Arduino boot a set program from memory into the ADAU DSP chip. This should also work on all other ADAU chips, but I have not tested each one yet.
+Without too much work, one can use the Sigma Studio "export system files" button to automatically generate all the data necessary for microcontroller integration, copy and paste it into the correct locations in the provided code, and use only 4 wires (5V, GND, SDA, and SCL) to have the Arduino boot a SigmaStudio program from memory into the ADAU DSP chip. This should also work on all other ADAU chips that can communicate via I2C, but I have not tested each one yet.
 
 
 
