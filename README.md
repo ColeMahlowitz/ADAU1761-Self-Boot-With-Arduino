@@ -76,8 +76,7 @@ Below is a photo of the Sigma Studio Schematic that I've generated for an audio 
 
 
 
-![github-large](https://github.com/ColeMahlowitz/ADAU1761-Self-Boot-With-Arduino/blob/main/SigmaStudio_SampleSchematic.JPG)
-
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-Self-Boot-With-Arduino/blob/Main/SigmaStudio_SampleSchematic.JPG)
 
 
 Once you have completed your project and have clicked the "link compile download" button, you must then click the "export system files" button right next door on the upper tab of the Sigma Studio environment. Doing so will prompt you to choose a folder where Sigma Studio will export automatically generated files according to your schematic. The only file needed for this integration is the file #IC_1.h file where "#" represents the file name you have chosen. This file contains the program data, paramater data, along with all the proper
@@ -90,7 +89,7 @@ The bulk of the work needed in this project is for the user to copy the register
 The last step is to copy the contents of the function "IC_DEFAULT_DOWNLOAD" from the #IC_1.h file 
 
 
-![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/main/Sigma%20Default%20Download%20Function.PNG)
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/Main/Sigma%20Default%20Download%20Function.PNG)
 
 This is a photo of the Default_Download funciton as it appears in the .h file. This must be copied and pasted into where it currently exists in the provided Arduino code. This function calls the "SIGMA_WRITE_REGISTER_BLOCK" and "SIGMA_WRITE_DELAY" macros and passes all the corresponding register data in order to write it to the ADAu1761.
 
@@ -105,7 +104,7 @@ The heavy lifting in this code relies on the two macros, "SIGMA_WRITE_REGISTER_B
 
 According to the datasheet, a typical I2C write to the ADAU1761 looks like this:
 
-![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/main/ADAU1761%20I2C%20Format.PNG)
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/Main/ADAU1761%20I2C%20Format.PNG)
 
 Basically, in order to write to the ADAU1761 over I2C, you must write the chip address to the line (in my case, 0x70), wait for an "AS" (acknowledged by slave), then write the high byte of the sub address word, wait for an "AS", write the low byte of the sub address word, wait for an "AS", and then write the data.
 
