@@ -77,6 +77,8 @@ Below is a photo of the Sigma Studio Schematic that I've generated for an audio 
 
 ![github-small](https://github.com/ColeMahlowitz/ADAU1761-with-Arduino-Bootloader/blob/master/SigmaStudio_SampleSchematic.jpg)
 
+![github-large](https://github.com/ColeMahlowitz/ADAU1761-Self-Boot-With-Arduino/blob/master/SigmaStudio_SampleSchematic.JPG)
+
 
 Once you have completed your project and have clicked the "link compile download" button, you must then click the "export system files" button right next door on the upper tab of the Sigma Studio environment. Doing so will prompt you to choose a folder where Sigma Studio will export automatically generated files according to your schematic. The only file needed for this integration is the file #IC_1.h file where "#" represents the file name you have chosen. This file contains the program data, paramater data, along with all the proper
 register address needed to program the ADAU1761 upon power up.
